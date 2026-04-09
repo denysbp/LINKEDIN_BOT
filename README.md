@@ -7,16 +7,8 @@ Instalação
 1. Crie um virtualenv e ative-o (recomendado):
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
+rode ./install.sh
 ```
-
-2. Instale dependências:
-
-```bash
-pip install -r requirements.txt
-```
-
 Configuração
 
 - Crie um arquivo `.env` com as variáveis:
