@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  job-bot:
+    build: .
+    container_name: job_linkedin_bot
+    # restart: always <- use se quiseres ter sinais a cada  segundo, irá rodar que nem servidor.
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: ["python","-u","bot.py"]
+
+  web:
+    build: .
+    container_name: job_linkedin_web
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    working_dir: /app
+    ports:
+      - "5000:5000"
+    command: ["python","-u","app.py"]
+    # restart: unless-stopped <- use se quiseres ter sinais a cada segundo, irá rodar que nem servidor.
+  
