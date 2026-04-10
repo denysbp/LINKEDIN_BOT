@@ -2,9 +2,6 @@ import os
 from logging_config import configure_logging
 configure_logging(os.getenv("LOG_LEVEL", "INFO"))
 import logging
-
-logger = logging.getLogger(__name__)
-
 from database import init_db
 from core.pipeline import process_jobs
 from services.linkedin import LinkedInClient
@@ -12,6 +9,7 @@ from services.parser import Parser
 from services.notifier import TelegramNotifier
 from config import KEYWORDS, LOCATION, ensure_telegram_configured
 
+logger = logging.getLogger(__name__)
 init_db()
 
 try:
