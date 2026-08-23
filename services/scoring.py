@@ -1,15 +1,24 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 class JobScorer:
     def score(self, job):
         score = 0
         title = job.title.lower()
-
+        self.keywords = os.getenv("KEYWORDS").lower().split(" ")
+        for key in self.keywords:
+            if key in title:
+                score += 2
         if "python" in title:
             score += 3
-        if "java" in title:
-            score += 3
+
         if "backend" in title:
             score += 2
         if "junior" in title:
+            score += 3
+        if "AI" in title:
             score += 3
 
         if "portugal" in job.location.lower():

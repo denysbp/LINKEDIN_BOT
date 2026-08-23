@@ -18,11 +18,11 @@ def process_jobs(jobs, notifier):
         if not flt.is_real_junior(job):
             continue
 
-        if not flt.is_backend(job):
+        if not flt.valid_jobs(job):
             continue
 
-        if is_sent(job.link):
-            continue
+        # if is_sent(job.link):
+        #     continue
 
         score = scorer.score(job)
         decision = decider.decide(score)

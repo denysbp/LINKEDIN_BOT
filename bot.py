@@ -8,14 +8,17 @@ from services.linkedin import LinkedInClient
 from services.parser import Parser
 from services.notifier import TelegramNotifier
 from config import KEYWORDS, LOCATION, ensure_telegram_configured
+import sys
 
-logger = logging.getLogger(__name__)
-init_db()
+logger = logging.getLogger("TELEGRAM-BOT")
+
 
 try:
     ensure_telegram_configured()
+    init_db()
 except Exception:
-    logger.warning("Telegram não configurado; notificações podem falhar")
+    logger.warning("Telegram não configurado;")
+    sys.exit(1)
 
 client = LinkedInClient()
 parser = Parser()

@@ -1,7 +1,11 @@
 import sqlite3
 from contextlib import closing
+import os
+from dotenv import load_dotenv
 
-DB_NAME = "jobs.db"
+load_dotenv()
+
+DB_NAME = os.getenv("DB_NAME_ENV")
 
 
 def init_db():

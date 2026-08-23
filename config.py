@@ -9,10 +9,17 @@ import os
 load_dotenv()
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
+KEYWORDS = os.getenv("KEYWORDS")
+LOCATION = os.getenv("LOCATION")
+DB_NAME = os.getenv("DB_NAME_ENV")
 
 def ensure_telegram_configured():
-    if not TELEGRAM_TOKEN or not CHAT_ID:
-        raise ValueError("Variáveis de ambiente TELEGRAM_TOKEN/CHAT_ID não configuradas!")
-
-KEYWORDS = os.getenv("KEYWORDS", "backend python java junior")
-LOCATION = os.getenv("LOCATION", "Portugal")
+    keys = [
+        TELEGRAM_TOKEN,
+        CHAT_ID,
+        KEYWORDS,
+        LOCATION,
+        DB_NAME
+    ]
+    if not any(keys):
+        raise ValueError("Variáveis de ambiente configuradas!")
