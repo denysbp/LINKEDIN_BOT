@@ -4,11 +4,6 @@ from logging.handlers import RotatingFileHandler
 
 
 def configure_logging(level: str = "INFO", log_file: str = "logs/bot.log"):
-    """Configura logging básico com handler de console e arquivo rotativo.
-
-    level: nível de logging (DEBUG/INFO/WARNING/ERROR)
-    log_file: caminho para arquivo de logs
-    """
     numeric_level = getattr(logging, level.upper(), logging.INFO)
     logging.basicConfig(level=numeric_level,
                         format="%(asctime)s %(levelname)s [%(name)s] %(message)s")

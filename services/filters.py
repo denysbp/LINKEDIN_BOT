@@ -8,10 +8,9 @@ logger = logging.getLogger(__name__)
 
 class SmartFilter:
     def filter(self, jobs: list):
-        """Filtra lista de vagas para júnior backend reais."""
         if not jobs:
             return []
-        return [job for job in jobs if self.is_real_junior(job) and self.valid_jobs(job)]
+        return [job for job in jobs if self.valid_jobs(job)]
 
     def valid_jobs(self, job):
         text = ((job.title or "") + " " + (getattr(job, "company", "") or "")).lower()

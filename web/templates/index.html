@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vagas Backend Junior</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <header class="header">
+            <h1>Vagas Backend Junior</h1>
+            <p>Oportunidades encontradas pelo teu bot.</p>
+        </header>
+
+        {% if jobs %}
+
+			<div class="jobs-length">
+				<h1>Vagas totais: {{ jobs|length }}</h1>
+			</div>
+            <section class="jobs">
+                {% for job in jobs %}
+
+                    <article class="job-card">
+
+                        <div class="job-header">
+                            <h2 class="job-title">
+                                {{ job.title }}
+                            </h2>
+
+                            <span class="badge">
+                                Backend
+                            </span>
+                        </div>
+
+                        <div class="company">
+                            {{ job.company }}
+                        </div>
+
+                        <div class="location">
+                            {{ job.location }}
+                        </div>
+
+                        <div class="job-footer">
+                            <a
+                                class="job-link"
+                                href="{{ job.link }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Ver vaga →
+                            </a>
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </section>
+
+        {% else %}
+
+            <div class="empty">
+                <h2>Nenhuma vaga encontrada</h2>
+                <p>O bot ainda não encontrou novas oportunidades.</p>
+            </div>
+
+        {% endif %}
+
+        <footer class="footer">
+            Vagas Backend Junior · Atualizado automaticamente
+        </footer>
+
+    </main>
+
+</body>
+</html>

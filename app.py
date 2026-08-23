@@ -1,8 +1,12 @@
 import os
 from flask import Flask, render_template_string, make_response
 from logging_config import configure_logging
+from dotenv import load_dotenv
+from config import ensure_telegram_configured
 
+ensure_telegram_configured()
 configure_logging(os.getenv("LOG_LEVEL", "INFO"))
+load_dotenv()
 
 from services.linkedin import LinkedInClient
 from services.parser import Parser
@@ -12,7 +16,13 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__)
+FILE = os.getcwd() + "/web/templates/index.html"
+
+app = Flask(
+    __name__,
+    template_folder="web/templates",
+    static_folder="web/static"
+    )
 
 
 @app.route("/")
@@ -26,17 +36,10 @@ def home():
         jobs = parser.parse(html)
         jobs = flt.filter(jobs)
 
-        template = """
-        <h1>Vagas Backend Junior</h1>
-        {% for job in jobs %}
-            <div>
-                <h3>{{job.title}}</h3>
-                <p>{{job.company}} - {{job.location}}</p>
-                <a href="{{job.link}}">Ver vaga</a>
-                <hr>
-            </div>
-        {% endfor %}
-        """
+
+        file = open(FILE, "r")
+        template = file.read()
+        file.close()
 
         return render_template_string(template, jobs=jobs)
     except Exception as e:

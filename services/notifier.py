@@ -1,6 +1,7 @@
 import requests
 import logging
-from config import TELEGRAM_TOKEN, CHAT_ID, ensure_telegram_configured
+from config import TELEGRAM_TOKEN, CHAT_ID, LIMIT, ensure_telegram_configured
+
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +34,7 @@ class TelegramNotifier:
             return False
 
     def send_jobs(self, jobs):
-        for job in jobs[:20]:
+        for job in jobs[:LIMIT]:
             msg = (
                 f"Decisão: {job.decision}\n"
                 f"Score: {job.score}\n"
