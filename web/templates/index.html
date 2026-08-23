@@ -13,7 +13,7 @@
     <main class="container">
 
         <header class="header">
-            <h1>Vagas Backend Junior</h1>
+            <h1>Vagas</h1>
             <p>Oportunidades encontradas pelo teu bot.</p>
         </header>
 
@@ -33,7 +33,7 @@
                             </h2>
 
                             <span class="badge">
-                                Backend
+                                {{ job.type}}
                             </span>
                         </div>
 
@@ -61,7 +61,13 @@
                 {% endfor %}
 
             </section>
-
+			<div class="buttons">
+				<p>Página {{ page }}</p>
+			{% if page > 0 %}
+				<a href="?page={{ page - 1 }}"  class="button">Anterior</a>
+			{% endif %}
+			<a href="?page={{ page + 1 }}"  class="button">Próxima</a>
+			</div>
         {% else %}
 
             <div class="empty">

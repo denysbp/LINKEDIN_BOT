@@ -9,3 +9,4 @@ class Job:
     link: str
     score: int = 0
     decision: str = ""
+    type: str = ""

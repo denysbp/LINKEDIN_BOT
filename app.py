@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template_string, make_response
+from flask import Flask, render_template_string, make_response, request
 from logging_config import configure_logging
 from dotenv import load_dotenv
 from config import ensure_telegram_configured
@@ -31,8 +31,11 @@ def home():
         client = LinkedInClient()
         parser = Parser()
         flt = SmartFilter()
+        PAGE_SIZE = 10
+        page = request.args.get("page", 0, type=int)
 
-        html = client.fetch(KEYWORDS, LOCATION)
+        start = page * PAGE_SIZE
+        html = client.fetch(KEYWORDS, LOCATION, start=start)
         jobs = parser.parse(html)
         jobs = flt.filter(jobs)
 
@@ -41,7 +44,7 @@ def home():
         template = file.read()
         file.close()
 
-        return render_template_string(template, jobs=jobs)
+        return render_template_string(template, jobs=jobs, page=page)
     except Exception as e:
         logger.exception("Erro ao gerar página inicial: %s", e)
         return make_response("Erro interno", 500)
