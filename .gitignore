@@ -2,4 +2,4 @@
 __pycache__/
 logs/
 jobs.db
-venv/
+.venv/
