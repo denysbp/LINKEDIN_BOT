@@ -33,7 +33,7 @@ class TelegramNotifier:
             return False
 
     def send_jobs(self, jobs):
-        for job in jobs[:10]:
+        for job in jobs[:20]:
             msg = (
                 f"Decisão: {job.decision}\n"
                 f"Score: {job.score}\n"

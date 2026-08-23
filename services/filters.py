@@ -13,33 +13,6 @@ class SmartFilter:
             return []
         return [job for job in jobs if self.is_real_junior(job) and self.valid_jobs(job)]
 
-    def is_real_junior(self, job):
-        title = (job.title or "").lower()
-
-        fake_patterns = [
-            "senior",
-            "sr",
-            "lead",
-            "principal",
-            "5+",
-            "4+",
-            "architect"
-        ]
-
-        junior_patterns = [
-            "junior",
-            "jr",
-            "entry",
-            "trainee",
-            "graduate",
-            "intern"
-        ]
-
-        if any(x in title for x in fake_patterns):
-            return False
-
-        return any(x in title for x in junior_patterns)
-
     def valid_jobs(self, job):
         text = ((job.title or "") + " " + (getattr(job, "company", "") or "")).lower()
         keywords = os.getenv("KEYWORDS").lower().split(" ")
