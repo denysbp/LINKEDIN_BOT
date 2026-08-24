@@ -1,4 +1,15 @@
-all: clean
+DOCKER := docker compose up
+
+all: run
+
+telegram:
+	$(DOCKER) job-bot
+
+web:
+	$(DOCKER) web
+
+run:
+	$(DOCKER)
 
 clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
@@ -6,4 +17,4 @@ clean:
 	find . -type d -name "build" -exec rm -rf {} +
 	find . -type f -name "*.pyc" -exec rm -f {} +
 
-.PHONY: clean all
+.PHONY: clean all web telegram

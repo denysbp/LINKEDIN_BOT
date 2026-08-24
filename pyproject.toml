@@ -1,0 +1,25 @@
+[project]
+name = "linkedin-bot"
+version = "1.0.0"
+description = "Bot feito para encontrar emprego por LinkedIn"
+requires-python = ">=3.10"
+dependencies = [
+	"beautifulsoup4",
+	"blinker",
+	"certifi",
+	"charset-normalizer",
+	"click",
+	"python-dotenv",
+	"Flask",
+	"idna",
+	"itsdangerous",
+	"Jinja2",
+	"MarkupSafe",
+	"requests",
+	"soupsieve",
+	"typing_extensions",
+	"urllib3",
+	"Werkzeug",
+	"pytest"
+]
+

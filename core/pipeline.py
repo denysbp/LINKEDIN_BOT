@@ -1,6 +1,7 @@
 from database import is_sent, mark_as_sent
 from services.filters import SmartFilter
 from services.scoring import JobScorer, DecisionEngine
+from services.notifier import TelegramNotifier
 import logging
 
 logger = logging.getLogger(__name__)
@@ -10,7 +11,7 @@ scorer = JobScorer()
 decider = DecisionEngine()
 
 
-def process_jobs(jobs, notifier):
+def process_jobs(jobs, notifier: TelegramNotifier):
     new_jobs = []
     for job in jobs:
 
@@ -27,12 +28,16 @@ def process_jobs(jobs, notifier):
         job.decision = decision
 
         new_jobs.append(job)
-        mark_as_sent(job)
 
+    if not new_jobs:
+        logger.info("Nenhuma vaga nova para notificar")
+        return
     new_jobs.sort(key=lambda x: x.score, reverse=True)
 
     try:
         notifier.send_jobs(new_jobs)
+        for job in jobs:
+            mark_as_sent(job)
         logger.info("Notificadas %d vagas", len(new_jobs))
     except Exception:
         logger.exception("Falha ao notificar vagas")

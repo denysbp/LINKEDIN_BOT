@@ -17,7 +17,7 @@ try:
     ensure_telegram_configured()
     init_db()
 except Exception:
-    logger.warning("Telegram não configurado;")
+    logger.warning("Telegram não configurado")
     sys.exit(1)
 
 client = LinkedInClient()

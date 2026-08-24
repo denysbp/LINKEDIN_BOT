@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   job-bot:
     build: .
@@ -21,7 +19,6 @@ services:
       - .:/app
     working_dir: /app
     ports:
-      - "5000:5000"
+      - "${FLASK_PORT}:${FLASK_PORT}"
     command: ["python","-u","app.py"]
-    # restart: unless-stopped <- use se quiseres ter sinais a cada segundo, irá rodar que nem servidor.
-  
+    restart: unless-stopped
