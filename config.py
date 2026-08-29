@@ -14,6 +14,7 @@ KEYWORDS = os.getenv("KEYWORDS")
 LOCATION = os.getenv("LOCATION")
 DB_NAME = os.getenv("DB_NAME_ENV")
 LIMIT = int(os.getenv("MESSAGE_LIMIT", 0))
+FLASK_PORT = os.getenv("FLASK_PORT")
 
 def create_env():
     FILE_NAME = ".env"
@@ -40,7 +41,8 @@ def ensure_telegram_configured():
         KEYWORDS,
         LOCATION,
         DB_NAME,
-        LIMIT
+        LIMIT,
+        FLASK_PORT
     ]
     if not any(keys):
         print("Variáveis de ambiente configuradas!")

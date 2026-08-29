@@ -13,19 +13,20 @@ import sys
 logger = logging.getLogger("TELEGRAM-BOT")
 
 
-try:
-    ensure_telegram_configured()
-    init_db()
-except Exception:
-    logger.warning("Telegram não configurado")
-    sys.exit(1)
 
-client = LinkedInClient()
-parser = Parser()
-notifier = TelegramNotifier()
 
 
 if __name__ == "__main__":
+    try:
+        ensure_telegram_configured()
+        init_db()
+    except Exception:
+        logger.warning("Telegram não configurado")
+        sys.exit(1)
+
+    client = LinkedInClient()
+    parser = Parser()
+    notifier = TelegramNotifier()
     html = client.fetch(KEYWORDS, LOCATION)
     jobs = parser.parse(html)
 
